@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -19,6 +20,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
@@ -82,6 +84,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 .snippet(alamat[i])
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
                                 .title(nama[i]));
+                        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                            @Override
+                            public void onInfoWindowClick(Marker marker) {
+                                Intent I = new Intent(getApplicationContext(), DetailActivity.class);
+                                startActivity(I);
+                            }
+                        });
+
                     } catch (JSONException je) {
 
                     }
